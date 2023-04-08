@@ -38,10 +38,13 @@ void printSubtitle(std::string const& subtitle) {
 
 void test_from_subject() {
   printTitle("Test from sunject pdf");
+  printSubtitle(
+      "The return value of deserialize() compares equal to the original "
+      "pointer");
   unsigned char data[8] = {0, 1, 2, 3, 4, 5, 6, 7};
-  Data d ;
+  Data d;
 
-  d.set(data) ;
+  d.set(data);
   uintptr_t raw = serialize(&d);
   Data* ptr = deserialize(raw);
   std::cout << "d         : " << d << std::endl;

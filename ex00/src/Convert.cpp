@@ -1,5 +1,6 @@
 #include "Convert.hpp"
 
+#include <climits>
 #include <iomanip>
 #include <iostream>
 

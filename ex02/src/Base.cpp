@@ -1,12 +1,15 @@
 #include "Base.hpp"
+
+#include <cstdlib>
+#include <iostream>
+
 #include "A.hpp"
 #include "B.hpp"
 #include "C.hpp"
-#include <iostream>
 
 Base::~Base() {
 #if DEBUG
-  std::cout << "[ Base destructor called ]" << std::endl ;
+  std::cout << "[ Base destructor called ]" << std::endl;
 #endif
 }
 
@@ -42,22 +45,25 @@ void identify(Base& p) {
     A& a = dynamic_cast<A&>(p);
     (void)a;
     std::cout << "A" << std::endl;
-    return ;
-  } catch (std::bad_cast& e) {}
+    return;
+  } catch (std::exception const& e) {
+  }
   // Identify B
   try {
     B& b = dynamic_cast<B&>(p);
     (void)b;
     std::cout << "B" << std::endl;
-    return ;
-  } catch (std::bad_cast& e) {}
+    return;
+  } catch (std::exception const& e) {
+  }
   // Identify C
   try {
     C& c = dynamic_cast<C&>(p);
     (void)c;
     std::cout << "C" << std::endl;
-    return ;
-  } catch (std::bad_cast& e) {}
+    return;
+  } catch (std::exception const& e) {
+  }
   // Unknown
   std::cout << "Unknown" << std::endl;
 }

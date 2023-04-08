@@ -1,9 +1,9 @@
 #include <iomanip>
 #include <iostream>
 
-#include "Base.hpp"
 #include "A.hpp"
 #include "B.hpp"
+#include "Base.hpp"
 #include "C.hpp"
 
 #define RESET "\033[m"
