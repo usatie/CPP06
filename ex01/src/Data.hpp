@@ -16,7 +16,7 @@ class Data {
   // getters
   unsigned char get(std::size_t idx) const;
   // setters
-  void set(unsigned char data[8]);
+  void set(unsigned char const data[8]);
 
  private:
   unsigned char _data[8];

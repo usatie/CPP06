@@ -36,18 +36,18 @@ Data::~Data() {
 #endif
 }
 
-void Data::set(unsigned char data[8]) {
+void Data::set(unsigned char const data[8]) {
   for (int i = 0; i < 8; i++) {
     _data[i] = data[i];
   }
 }
 
 unsigned char Data::get(std::size_t idx) const {
-  if (idx > 8) {
-    std::cout << "Error: index out of range" << std::endl;
-    return 0;
+  if (idx < 8) {
+    return _data[idx];
   }
-  return _data[idx];
+  std::cout << "Error: index out of range" << std::endl;
+  return 0;
 }
 
 std::ostream& operator<<(std::ostream& os, const Data& d) {
