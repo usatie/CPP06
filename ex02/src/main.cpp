@@ -1,6 +1,6 @@
+#include <cstdlib>
 #include <iomanip>
 #include <iostream>
-#include <cstdlib>
 
 #include "A.hpp"
 #include "B.hpp"
