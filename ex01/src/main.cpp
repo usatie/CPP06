@@ -2,6 +2,7 @@
 #include <iostream>
 
 #include "Data.hpp"
+#include "Serializer.hpp"
 
 #define RESET "\033[m"
 #define GREEN "\033[0;32m"
@@ -45,8 +46,8 @@ void test_from_subject() {
   Data d;
 
   d.set(data);
-  uintptr_t raw = serialize(&d);
-  Data* ptr = deserialize(raw);
+  uintptr_t raw = Serializer::serialize(&d);
+  Data* ptr = Serializer::deserialize(raw);
   std::cout << "d         : " << d << std::endl;
   std::cout << "raw       : " << raw << std::endl;
   std::cout << "&d        : " << &d << std::endl;
