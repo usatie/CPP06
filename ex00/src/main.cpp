@@ -3,7 +3,7 @@
 #include <iomanip>
 #include <iostream>
 
-#include "Convert.hpp"
+#include "ScalarConverter.hpp"
 
 int main(int argc, const char *argv[]) {
   // Validate the command line arguments
@@ -18,8 +18,7 @@ int main(int argc, const char *argv[]) {
 
   // Print the literal
   try {
-    Convert convert;
-    convert.run(literal);
+	  ScalarConverter::convert(literal);
   } catch (std::exception &e) {
     std::cerr << "Error: " << e.what() << std::endl;
     return 1;

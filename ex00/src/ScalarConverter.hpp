@@ -1,5 +1,5 @@
-#ifndef CONVERT_HPP
-#define CONVERT_HPP
+#ifndef SCALARCONVERTER_HPP
+#define SCALARCONVERTER_HPP
 
 #include <iostream>
 
@@ -13,16 +13,10 @@ enum LiteralType {
 
 enum LiteralType detectLiteralType(std::string const &literal);
 
-class Convert {
+class ScalarConverter {
  public:
-  // Orthodox canonical form
-  Convert();
-  Convert(const Convert &c);
-  Convert &operator=(const Convert &c);
-  ~Convert();
-
-  // Member functions
-  void run(std::string const &literal) const;
+  // Static functions
+  static void convert(std::string const &literal);
 
   // Exceptions
   class ConversionError : public std::exception {
@@ -34,6 +28,10 @@ class Convert {
    private:
     std::string msg_;
   };
+
+ private:
+  // This is static class, so don't have to implement it
+  ScalarConverter();
 
  private:
   // Helper functions

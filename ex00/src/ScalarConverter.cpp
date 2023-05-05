@@ -1,43 +1,13 @@
-#include "Convert.hpp"
+#include "ScalarConverter.hpp"
 
 #include <climits>
 #include <iomanip>
 #include <iostream>
 
 /* ==============================================
- *            Orthodox Canonical Form
+ *               Convert functions
  * ============================================== */
-Convert::Convert() {
-#ifdef DEBUG
-  std::cout << "[ Convert Default constructor called ]" << std::endl;
-#endif
-}
-
-Convert::Convert(const Convert& c) {
-#if DEBUG
-  std::cout << "[ Convert Copy constructor called ]" << std::endl;
-#endif
-  (void)c;
-}
-
-Convert& Convert::operator=(const Convert& c) {
-#if DEBUG
-  std::cout << "[ Convert Copy assignment operator called ]" << std::endl;
-#endif
-  (void)c;
-  return *this;
-}
-
-Convert::~Convert() {
-#ifdef DEBUG
-  std::cout << "[ Convert destructor called ]" << std::endl;
-#endif
-}
-
-/* ==============================================
- *               Member functions
- * ============================================== */
-void Convert::run(std::string const& literal) const {
+void ScalarConverter::convert(std::string const& literal) {
   // Detect the type of literal ( char/int/float/double )
   enum LiteralType type = detectLiteralType(literal);
   switch (type) {
@@ -68,7 +38,7 @@ void Convert::run(std::string const& literal) const {
       // Check if conversion is successful, i.e. the whole string is converted.
       // The last character should be 'f' or 'F' for float.
       if (i != literal.length() - 1) {
-        throw Convert::ConversionError("Invalid float literal: " + literal);
+        throw ScalarConverter::ConversionError("Invalid float literal: " + literal);
       }
       if (f < CHAR_MIN || f > CHAR_MAX) {
         std::cout << "char: "
@@ -91,7 +61,7 @@ void Convert::run(std::string const& literal) const {
       std::size_t i;
       double d = std::stod(literal, &i);
       if (i != literal.length()) {
-        throw Convert::ConversionError("Invalid double literal: " + literal);
+        throw ScalarConverter::ConversionError("Invalid double literal: " + literal);
       }
       if (d < CHAR_MIN || d > CHAR_MAX) {
         std::cout << "char: "
@@ -111,7 +81,7 @@ void Convert::run(std::string const& literal) const {
       break;
     }
     default: {
-      throw Convert::ConversionError("Invalid literal type: " + literal);
+      throw ScalarConverter::ConversionError("Invalid literal type: " + literal);
     }
   }
 }
@@ -119,7 +89,7 @@ void Convert::run(std::string const& literal) const {
 /* ==============================================
  *               Helper functions
  * ============================================== */
-void Convert::printChar(char c) {
+void ScalarConverter::printChar(char c) {
   if (isprint(c)) {
     std::cout << "char: "
               << "'" << c << "'" << std::endl;
@@ -129,19 +99,19 @@ void Convert::printChar(char c) {
   }
 }
 
-void Convert::printInt(int i) { std::cout << "int: " << i << std::endl; }
+void ScalarConverter::printInt(int i) { std::cout << "int: " << i << std::endl; }
 
-void Convert::printFloat(float f) {
+void ScalarConverter::printFloat(float f) {
   std::cout << "float: " << std::fixed << std::setprecision(1) << f << "f"
             << std::endl;
 }
 
-void Convert::printDouble(double d) {
+void ScalarConverter::printDouble(double d) {
   std::cout << "double: " << std::fixed << std::setprecision(1) << d
             << std::endl;
 }
 
-enum LiteralType Convert::detectLiteralType(std::string const& literal) {
+enum LiteralType ScalarConverter::detectLiteralType(std::string const& literal) {
   if (literal.length() == 0) {
     return NOSUCHTYPE_LITERAL;
   }
@@ -193,11 +163,11 @@ enum LiteralType Convert::detectLiteralType(std::string const& literal) {
 /* ==============================================
  *                   Exceptions
  * ============================================== */
-const char* Convert::ConversionError::what() const throw() {
+const char* ScalarConverter::ConversionError::what() const throw() {
   return msg_.c_str();
 }
 
-Convert::ConversionError::ConversionError(std::string const& msg) throw()
+ScalarConverter::ConversionError::ConversionError(std::string const& msg) throw()
     : msg_(msg) {}
 
-Convert::ConversionError::~ConversionError() throw() {}
+ScalarConverter::ConversionError::~ConversionError() throw() {}
