@@ -18,7 +18,7 @@ int main(int argc, const char *argv[]) {
 
   // Print the literal
   try {
-	  ScalarConverter::convert(literal);
+    ScalarConverter::convert(literal);
   } catch (std::exception &e) {
     std::cerr << "Error: " << e.what() << std::endl;
     return 1;

@@ -38,7 +38,8 @@ void ScalarConverter::convert(std::string const& literal) {
       // Check if conversion is successful, i.e. the whole string is converted.
       // The last character should be 'f' or 'F' for float.
       if (i != literal.length() - 1) {
-        throw ScalarConverter::ConversionError("Invalid float literal: " + literal);
+        throw ScalarConverter::ConversionError("Invalid float literal: " +
+                                               literal);
       }
       if (f < CHAR_MIN || f > CHAR_MAX) {
         std::cout << "char: "
@@ -61,7 +62,8 @@ void ScalarConverter::convert(std::string const& literal) {
       std::size_t i;
       double d = std::stod(literal, &i);
       if (i != literal.length()) {
-        throw ScalarConverter::ConversionError("Invalid double literal: " + literal);
+        throw ScalarConverter::ConversionError("Invalid double literal: " +
+                                               literal);
       }
       if (d < CHAR_MIN || d > CHAR_MAX) {
         std::cout << "char: "
@@ -81,7 +83,8 @@ void ScalarConverter::convert(std::string const& literal) {
       break;
     }
     default: {
-      throw ScalarConverter::ConversionError("Invalid literal type: " + literal);
+      throw ScalarConverter::ConversionError("Invalid literal type: " +
+                                             literal);
     }
   }
 }
@@ -99,7 +102,9 @@ void ScalarConverter::printChar(char c) {
   }
 }
 
-void ScalarConverter::printInt(int i) { std::cout << "int: " << i << std::endl; }
+void ScalarConverter::printInt(int i) {
+  std::cout << "int: " << i << std::endl;
+}
 
 void ScalarConverter::printFloat(float f) {
   std::cout << "float: " << std::fixed << std::setprecision(1) << f << "f"
@@ -111,7 +116,8 @@ void ScalarConverter::printDouble(double d) {
             << std::endl;
 }
 
-enum LiteralType ScalarConverter::detectLiteralType(std::string const& literal) {
+enum LiteralType ScalarConverter::detectLiteralType(
+    std::string const& literal) {
   if (literal.length() == 0) {
     return NOSUCHTYPE_LITERAL;
   }
@@ -167,7 +173,8 @@ const char* ScalarConverter::ConversionError::what() const throw() {
   return msg_.c_str();
 }
 
-ScalarConverter::ConversionError::ConversionError(std::string const& msg) throw()
+ScalarConverter::ConversionError::ConversionError(
+    std::string const& msg) throw()
     : msg_(msg) {}
 
 ScalarConverter::ConversionError::~ConversionError() throw() {}
