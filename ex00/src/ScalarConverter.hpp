@@ -11,8 +11,6 @@ enum LiteralType {
   NOSUCHTYPE_LITERAL
 };
 
-enum LiteralType detectLiteralType(std::string const &literal);
-
 class ScalarConverter {
  public:
   // Static functions
